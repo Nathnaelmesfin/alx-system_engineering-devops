@@ -1,5 +1,12 @@
-# install puppet-lint -v 2.5.0
+# Define a package resource for Flask
+package { 'Flask':
+  ensure   => '2.1.0',
+  provider => 'pip3',
+}
 
-exec { 'puppet-lint':
-  command => '/usr/bin/apt-get -y install puppet-lint -v 2.5.0',
+# Notify to refresh the shell so that 'flask' command is available immediately
+exec { 'Refresh Shell':
+  command     => '/bin/true',
+  refreshonly => true,
+  subscribe   => Package['Flask'],
 }
