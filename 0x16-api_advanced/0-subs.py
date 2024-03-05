@@ -1,32 +1,23 @@
 #!/usr/bin/python3
-'''A module containing functions for working with the Reddit API.
-'''
 import requests
 
-
-BASE_URL = 'https://www.reddit.com'
-'''Reddit's base API URL.
-'''
-
-
 def number_of_subscribers(subreddit):
-    '''Retrieves the number of subscribers in a given subreddit.
-    '''
-    api_headers = {
-        'Accept': 'application/json',
-        'User-Agent': ' '.join([
-            'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-            'AppleWebKit/537.36 (KHTML, like Gecko)',
-            'Chrome/97.0.4692.71',
-            'Safari/537.36',
-            'Edg/97.0.1072.62'
-        ])
-    }
-    res = requests.get(
-        '{}/r/{}/about/.json'.format(BASE_URL, subreddit),
-        headers=api_headers,
-        allow_redirects=False
-    )
-    if res.status_code == 200:
-        return res.json()['data']['subscribers']
-    return 0
+    """
+    Queries the Reddit API and returns the number of subscribers for a given subreddit.
+    Returns 0 if the subreddit is invalid.
+    """
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {'User-Agent': 'custom user agent'}
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        try:
+            data = response.json()
+            return data['data']['subscribers']
+        except (KeyError, ValueError):
+            # In case the JSON is not in the expected format or does not contain the subscribers count
+            return 0
+    else:
+        # If the status code is not 200, the subreddit is probably invalid
+        return 0
+
