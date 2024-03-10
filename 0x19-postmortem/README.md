@@ -39,4 +39,4 @@ Using one of the web stack debugging project issue I have previously done or an 
 - Be brief and straight to the point, between 400 to 600 words
 
 ## Resources
-[Apiumhub](https://apiumhub.com/tech-blog-barcelona/software-development-project-postmortem/)
+[Medium](https://medium.com/@nathnaelmesfin77/issue-summary-f471e0e6acf3?source=friends_link&sk=57c830383175d286b80f8262cbf5043a)
